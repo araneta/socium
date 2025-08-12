@@ -16,8 +16,7 @@ services:
 
   app:
     build:
-      context: ./apps/next   # <- point to next folder
-      dockerfile: Dockerfile
+      context: ./apps/next      
     container_name: cvapp_app
     restart: unless-stopped
     depends_on:
