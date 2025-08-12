@@ -1,0 +1,15 @@
+Given the following form data:
+Full Name: {{ $json["body"]["formData"]["name"][0] }}
+Email: {{ $json["body"]["formData"]["email"][0] }}
+Phone: {{ $json["body"]["formData"]["phone"][0] }}
+Skills: {{ $json["body"]["formData"]["skills"][0] }}
+Experience: {{ $json["body"]["formData"]["experience"][0] }}
+
+And the following PDF text:
+{{ $json["body"]["pdfText"] }}
+
+Compare the two but ignore case sensitivity issue. If all the information matches, respond with:
+"✅ Success: All fields match."
+
+If there are any differences, respond with:
+"❌ Error: The following fields do not match: [list the mismatched fields and explain the differences]."

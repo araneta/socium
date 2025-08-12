@@ -1,0 +1,100 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "compare-form-pdf",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "16170870-f796-495f-aeca-742e19244fa7",
+      "webhookId": "b2ce7b59-227d-4b36-b7ab-fb85258d55c2"
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4-turbo",
+        "prompt": {
+          "messages": [
+            {
+              "content": "=Given the following form data:\nFull Name: {{ $json[\"body\"][\"formData\"][\"name\"][0] }}\nEmail: {{ $json[\"body\"][\"formData\"][\"email\"][0] }}\nPhone: {{ $json[\"body\"][\"formData\"][\"phone\"][0] }}\nSkills: {{ $json[\"body\"][\"formData\"][\"skills\"][0] }}\nExperience: {{ $json[\"body\"][\"formData\"][\"experience\"][0] }}\n\nAnd the following PDF text:\n{{ $json[\"body\"][\"pdfText\"] }}\n\nCompare the two. If all the information matches, respond with:\n\"✅ Success: All fields match.\"\n\nIf there are any differences, respond with:\n\"❌ Error: The following fields do not match: [list the mismatched fields and explain the differences].\""
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "name": "OpenAI Compare",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -32
+      ],
+      "id": "b671b1d0-b40a-44b2-a10a-11730f40c166",
+      "credentials": {
+        "openAiApi": {
+          "id": "pXtKLVdyKCeK7z6G",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        512,
+        -48
+      ],
+      "id": "b0e123c2-b440-4496-ae51-498501ebbb50"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Compare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Compare": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ac9008a7-ef5b-41ce-b9e1-736a7e134cf5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "62ade4c88555c3ece69031842548a11c03161c2ec144f0f53d3c197d9925d502"
+  },
+  "id": "KVGIRGuQ1w5w6o04",
+  "tags": []
+}
