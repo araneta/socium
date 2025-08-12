@@ -16,7 +16,7 @@ services:
 
   app:
     build:
-      context: ./apps/backend   # <- point to backend folder
+      context: ./apps/next   # <- point to next folder
       dockerfile: Dockerfile
     container_name: cvapp_app
     restart: unless-stopped
@@ -30,7 +30,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./apps/backend/uploads:/app/uploads
+      - ./apps/next/uploads:/app/uploads
       
 
 volumes:
