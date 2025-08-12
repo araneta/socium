@@ -11,5 +11,5 @@ And the following PDF text:
 Compare the two but ignore case sensitivity issue. If all the information matches, respond with:
 "✅ Success: All fields match."
 
-If there are any differences, respond with:
+If there are any differences but ignore case sensitivity issue, respond with:
 "❌ Error: The following fields do not match: [list the mismatched fields and explain the differences]."
